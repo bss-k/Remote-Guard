@@ -1,6 +1,6 @@
 # Remote-Guard
 
-**RemoteGuard** is a drop-in, server-side guard for Roblox remotes. It sits in front of your
+**RemoteGuard** is a drop-in, server-side guard for remotes. It sits in front of your
 handlers and decides which calls get through: schema validation, per-player rate limits, and
 readable, throttled violation logs.
 
@@ -170,7 +170,7 @@ selene src && stylua --check src tests
 rojo build -o RemoteGuard.rbxm
 ```
 
-See [`tests/README.md`](tests/README.md) for how the Lune suite loads Roblox-style modules and how
+See [`tests/README.md`](tests/README.md) for how the Lune suite loads modules and how
 to run the Studio integration test.
 
 ## License
