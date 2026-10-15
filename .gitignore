@@ -1,0 +1,23 @@
+# Wally
+Packages/
+DevPackages/
+ServerPackages/
+wally.lock
+
+# Rojo / Studio build output
+sourcemap.json
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+*.rbxl.lock
+*.lock.rbxl
+
+# Selene's generated Roblox standard library
+roblox.yml
+roblox.toml
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

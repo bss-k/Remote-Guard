@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Lint, format, test, build
+    runs-on: ubuntu-latest
+    env:
+      ROKIT_VERSION: "1.2.0"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rokit
+        run: |
+          set -euo pipefail
+          curl -sSfL -o "$RUNNER_TEMP/rokit.zip" \
+            "https://github.com/rojo-rbx/rokit/releases/download/v${ROKIT_VERSION}/rokit-${ROKIT_VERSION}-linux-x86_64.zip"
+          unzip -o "$RUNNER_TEMP/rokit.zip" -d "$RUNNER_TEMP/rokit"
+          "$RUNNER_TEMP/rokit/rokit" self-install
+          echo "$HOME/.rokit/bin" >> "$GITHUB_PATH"
+
+      - name: Install toolchain from rokit.toml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Authenticating only raises GitHub's API rate limit; installs still work without it.
+          rokit authenticate github --token "$GITHUB_TOKEN" || echo "rokit auth skipped"
+          rokit install --no-trust-check
+
+      - name: Selene
+        run: selene src
+
+      - name: StyLua
+        run: stylua --check src tests
+
+      - name: Lune tests
+        run: lune run tests
+
+      - name: Rojo build
+        run: rojo build default.project.json -o RemoteGuard.rbxm
