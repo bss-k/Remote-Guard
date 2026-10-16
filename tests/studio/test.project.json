@@ -1,0 +1,21 @@
+{
+	"name": "RemoteGuardStudioTest",
+	"tree": {
+		"$className": "DataModel",
+		"ServerScriptService": {
+			"RemoteGuard": {
+				"$path": "../../src"
+			},
+			"RemoteGuardStudioTest": {
+				"$path": "RemoteGuardTest.server.luau"
+			}
+		},
+		"StarterPlayer": {
+			"StarterPlayerScripts": {
+				"RemoteGuardStudioTest": {
+					"$path": "RemoteGuardTest.client.luau"
+				}
+			}
+		}
+	}
+}

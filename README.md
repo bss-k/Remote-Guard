@@ -122,6 +122,7 @@ Set fields before wrapping remotes; they are validated each time a remote is wra
 | `t.integer(min?, max?)` | finite whole number |
 | `t.string(maxLen? = 256, pattern?)` | string up to `maxLen` bytes, optionally matching a Lua pattern |
 | `t.boolean()`, `t.literal(value)`, `t.enum({ values })` | exact values |
+| `t.any()` | anything, including `nil`; **no checks at all** (no type, size or depth limits). An escape hatch for a deliberately flexible value: validate it in your handler. |
 | `t.vector3()`, `t.unitVector3(tolerance? = 0.01)` | Vector3 with finite components (unit length) |
 | `t.instance(className?, descendantOf?)` | a live (not destroyed) Instance |
 | `t.optional(schema)` | `nil` or the schema |

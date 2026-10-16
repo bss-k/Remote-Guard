@@ -92,6 +92,12 @@ function t.boolean(): Schema
 	return new("boolean", {})
 end
 
+-- Escape hatch for a deliberately flexible value: accepts anything, including nil, and
+-- checks nothing (no type, size or depth limits). Validate it yourself in the handler.
+function t.any(): Schema
+	return new("any", {})
+end
+
 function t.literal(value: string | number | boolean): Schema
 	if not isLiteral(value) then
 		devError("literal", "value must be a string, boolean or finite number, got " .. typeof(value))

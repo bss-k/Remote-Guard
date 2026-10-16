@@ -106,6 +106,15 @@ function Leaves.string(node: any, _ctx: Context): Compiled
 	end, "string")
 end
 
+local function acceptAll(): boolean
+	return true
+end
+
+-- t.any(): no checks at all. Counts as optional, so a trailing t.any() argument may be omitted.
+function Leaves.any(_node: any, _ctx: Context): Compiled
+	return { check = acceptAll, describe = "any", optional = true, redaction = nil }
+end
+
 function Leaves.boolean(_node: any, _ctx: Context): Compiled
 	return leaf(function(value)
 		if type(value) ~= "boolean" then

@@ -225,6 +225,38 @@ describe("Schema", function()
 		end)
 	end)
 
+	describe("any", function()
+		it("accepts every value, including nil and hostile tables", function()
+			local cyclic: any = {}
+			cyclic.self = cyclic
+			for _, value in { 1, 0 / 0, "x", true, Vector3.new(0 / 0, 0, 0), print, setmetatable({}, {}), cyclic } do
+				accepts(t.any(), value)
+			end
+			accepts(t.any(), nil)
+		end)
+
+		it("skips only its own field inside a strict struct", function()
+			local schema = { id = t.integer(), meta = t.any() }
+			accepts(schema, { id = 1, meta = { anything = { goes = true } } })
+			accepts(schema, { id = 1 })
+			rejects(schema, { id = "1", meta = 5 }, "id: expected integer, got string")
+			rejects(schema, { id = 1, meta = 5, extra = 1 }, "extra: unexpected key")
+		end)
+
+		it("works as a flexible positional argument", function()
+			local schema = t.args(t.string(16), t.any())
+			accepts(schema, table.pack("emote", { 1, 2 }))
+			accepts(schema, table.pack("emote"))
+			rejects(schema, table.pack(1, "x"), "argument 1: expected string, got number")
+			rejects(schema, table.pack("emote", 1, 2), "expected 1 to 2 arguments, got 3")
+		end)
+
+		it("is described as any in union reasons", function()
+			local ok = run(t.union({ t.integer(), t.any() }), "x")
+			eq(ok, true)
+		end)
+	end)
+
 	describe("optional / union", function()
 		it("optional accepts nil", function()
 			accepts({ note = t.optional(t.string()) }, {})

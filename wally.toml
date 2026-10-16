@@ -1,0 +1,12 @@
+[package]
+name = "bss-k/remote-guard"
+description = "Drop-in server-side guard for Roblox remotes: schema validation, rate limiting and readable violation logs."
+version = "0.1.0"
+license = "MIT"
+authors = ["bss-k"]
+realm = "server"
+registry = "https://github.com/UpliftGames/wally-index"
+repository = "https://github.com/bss-k/Remote-Guard"
+exclude = ["tests", "examples", "docs", ".github"]
+
+[dependencies]

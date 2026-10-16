@@ -31,3 +31,4 @@ While the version is `0.x`, minor releases may contain breaking changes.
   RemoteEvent adapter (also accepts UnreliableRemoteEvent). Each transport can be wrapped once; `Disconnect()` frees it
   and clears its rate buckets. Rate buckets are cleared on `PlayerRemoving`.
 - Studio integration test (`tests/studio/`), usage example (`examples/basic.server.luau`), full README.
+- `t.any()`: accepts any value (including nil) without checks, for deliberately flexible arguments.
