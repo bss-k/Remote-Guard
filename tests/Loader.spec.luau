@@ -9,7 +9,7 @@ describe("loader", function()
 	it("loads the real library root from src/", function()
 		local Guard = Loader.new().require()
 		eq(type(Guard), "table")
-		eq(Guard.version, "0.1.0-dev")
+		eq(Guard.version, "0.1.0")
 	end)
 
 	it("resolves script.X, script.Parent.X and script.Parent.Parent.X", function()

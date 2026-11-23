@@ -8,7 +8,7 @@ While the version is `0.x`, minor releases may contain breaking changes.
 
 ## [Unreleased]
 
-## [0.1.0-dev]
+## [0.1.0] - 2026-11-23
 
 ### Added
 
@@ -32,3 +32,6 @@ While the version is `0.x`, minor releases may contain breaking changes.
   and clears its rate buckets. Rate buckets are cleared on `PlayerRemoving`.
 - Studio integration test (`tests/studio/`), usage example (`examples/basic.server.luau`), full README.
 - `t.any()`: accepts any value (including nil) without checks, for deliberately flexible arguments.
+
+[Unreleased]: https://github.com/bss-k/Remote-Guard/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/bss-k/Remote-Guard/releases/tag/v0.1.0
